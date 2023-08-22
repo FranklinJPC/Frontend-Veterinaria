@@ -17,7 +17,20 @@ const FormularioPerfil = () => {
             <div>
                 <label
                     htmlFor='nombre'
-                    className='text-gray-700 uppercase font-bold text-sm'>Nombre: </label>
+                    className='text-gray-700 uppercase font-bold text-sm'>Apellido: </label>
+                <input
+                    id='nombre'
+                    type="text"
+                    className='border-2 w-full p-2 mt-2 placeholder-gray-400 rounded-md mb-5'
+                    placeholder='nombre'
+                    name='nombre'
+                />
+            </div>
+            
+            <div>
+                <label
+                    htmlFor='nombre'
+                    className='text-gray-700 uppercase font-bold text-sm'>Direccion: </label>
                 <input
                     id='nombre'
                     type="text"
@@ -29,7 +42,7 @@ const FormularioPerfil = () => {
             <div>
                 <label
                     htmlFor='nombre'
-                    className='text-gray-700 uppercase font-bold text-sm'>Nombre: </label>
+                    className='text-gray-700 uppercase font-bold text-sm'>Telefono: </label>
                 <input
                     id='nombre'
                     type="text"
