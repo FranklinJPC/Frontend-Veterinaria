@@ -4,7 +4,7 @@ import AuthContext from "../context/AuthProvider"
 import axios from 'axios';
 import Mensaje from "./Alertas/Mensaje";
 
-export const Formulario = () => {
+export const Formulario = ({paciente}) => {
 
     const {auth} = useContext(AuthContext)
     const navigate = useNavigate()
@@ -19,49 +19,48 @@ export const Formulario = () => {
         sintomas: paciente?.sintomas ??""
 })
 
-    const handleChange = (e) => {
-        setform({...form,
-            [e.target.name]:e.target.value
-        })
-    }
+const handleChange = (e) => {
+    setform({ ...form, [e.target.name]: e.target.value });
+};
 
-    const handleSubmit = async (e) => {
-        e.preventDefault()
+const handleSubmit = async (e) => {
+    e.preventDefault();
 
-        if (paciente?._id) {
-            const token = localStorage.getItem('token')
-            const url = `${import.meta.env.VITE_BACKEND_URL}/paciente/actualizar/${paciente?._id}`
-            const options = {
-                headers: {
-                    method: 'PUT',
-                    'Content-Type': 'application/json',
-                    Authorization: `Bearer ${token}`
-                }
-            }
-            await axios.put(url, form, options)
-            navigate('/dashboard/listar')
-        }
-        else {
-            try {
-                const token = localStorage.getItem('token')
-                form.id = auth._id
-                const url = `${import.meta.env.VITE_BACKEND_URL}/paciente/registro`
-                const options = {
-                    headers: {
-                        'Content-Type': 'application/json',
-                        Authorization: `Bearer ${token}`
-                    }
-                }
-                await axios.post(url, form, options)
-                navigate('/dashboard/listar')
-            } catch (error) {
-                setMensaje({ respuesta: error.response.data.msg, tipo: false })
-                setTimeout(() => {
-                    setMensaje({})
-                }, 3000);
-            }
-        }
+    if (paciente?._id) {
+    const token = localStorage.getItem("token");
+    const url = `${import.meta.env.VITE_BACKEND_URL}/paciente/actualizar/${
+        paciente?._id
+    }`;
+    const options = {
+        headers: {
+        method: "PUT",
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+        },
+    };
+    await axios.put(url, form, options);
+    navigate("/dashboard/listar");
+    } else {
+    try {
+        const token = localStorage.getItem("token");
+        form.id = auth._id;
+        const url = `${import.meta.env.VITE_BACKEND_URL}/paciente/registro`;
+        const options = {
+        headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+        },
+        };
+        await axios.post(url, form, options);
+        navigate("/dashboard/listar");
+    } catch (error) {
+        setMensaje({ respuesta: error.response.data.msg, tipo: false });
+        setTimeout(() => {
+        setMensaje({});
+        }, 3000);
     }
+    }
+};
 
     return (
         
@@ -168,10 +167,9 @@ export const Formulario = () => {
 
             <input
                 type="submit"
-                className='bg-gray-600 w-full p-3 
-                    text-slate-300 uppercase font-bold rounded-lg 
-                    hover:bg-gray-900 cursor-pointer transition-all'
-                value={paciente?._id ? 'Actualizar paciente' : 'Registrar paciente'} />
+                className='bg-gray-600 w-full p-3 text-slate-300 uppercase font-bold rounded-lg hover:bg-gray-900 cursor-pointer transition-all'
+                value={paciente?._id ? 'Actualizar paciente' : 'Registrar paciente'} 
+            />
 
         </form>
     )

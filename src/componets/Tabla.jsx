@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { MdDeleteForever, MdNoteAdd, MdInfo } from "react-icons/md";
-import axios from 'axios';
+import axios from "axios";
 import Mensaje from "./Alertas/Mensaje";
-import { useNavigate } from 'react-router-dom'
+import { useNavigate } from "react-router-dom";
 
 const Tabla = () => {
   const navigate = useNavigate();
@@ -95,9 +95,9 @@ const Tabla = () => {
                     }
                   />
 
-                  <MdInfo
-                    className="h-7 w-7 text-slate-800 cursor-pointer inline-block mr-2"
-                    onClick={() => navigate(`/dashboard/actualizar/${paciente._id}`)}
+                  <MdInfo 
+                  className="h-7 w-7 text-slate-800 cursor-pointer inline-block mr-2" 
+                  onClick={() => navigate(`/dashboard/actualizar/${paciente._id}`)}    
                   />
 
                   <MdDeleteForever
@@ -116,4 +116,4 @@ const Tabla = () => {
   );
 };
 
-export default Tabla
+export default Tabla;
