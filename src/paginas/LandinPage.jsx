@@ -24,7 +24,7 @@ export const LandinPage = () => {
             <main className='bg-white px-10 md:px-20 lg:px-40 dark:bg-gray-800'>
                 <section>
                     <nav className='p-10 mb-12 flex justify-between'>
-                        <h1 className='text-2xl font-bold dark:text-white'>App-Demo</h1>
+                        <h1 className='text-2xl font-bold dark:text-white'>DOGY-CARE</h1>
                         <ul className='flex items-center'>
                             <li><img onClick={()=>setdarkMode(!darkMode)} className='cursor-pointer' src={logoDarkMode} alt="logo" width={40} height={40}/></li>
                             <li><Link to="/login" className='bg-gray-600 text-slate-400 px-6 py-2 rounded-full ml-8 hover:bg-gray-900 hover:text-white' href="#">Login</Link></li>
@@ -32,9 +32,8 @@ export const LandinPage = () => {
                     </nav>
 
                     <div className='text-center'>
-                        <h2 className='text-5xl py-2 text-teal-600 font-medium md:text-6xl'>Proyect Demo</h2>
-                        <h3 className='text-2xl py-2 md:text-3xl dark:text-white'>Scalable and Responsive</h3>
-                        <p className='text-md py-5 leading-8 text-gray-800 md:text-xl max-w-lg mx-auto dark:text-white'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Vel vero dolore pariatur asperiores voluptatibus sunt optio iste atque animi id odio aliquid sapiente voluptatem, accusantium, ea sed quibusdam a. Itaque.</p>
+                        <h2 className='text-5xl py-2 text-teal-600 font-medium md:text-6xl'>Clinica veterinaria</h2>
+                        <h3 className='text-2xl py-2 md:text-3xl dark:text-white'>Más que una consulta es crear un vinculo</h3>
                     </div>
 
                     <div className='text-5xl flex justify-center gap-16 py-3'>
@@ -88,53 +87,6 @@ export const LandinPage = () => {
                     </div>
                 </section>
 
-                <section>
-                    <div>
-                        <h3 className='text-3xl py-1 dark:text-white'>Proyects</h3>
-                        <p className='text-md py-2 leading-8 text-gray-800 dark:text-white'>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Molestiae, delectus iure <span className='text-teal-500'>quibusdam</span> quas quaerat itaque, est minima ducimus recusandae illo ipsam numquam nam earum libero <span className='text-teal-500'>deleniti</span> voluptatem! Autem, veniam ut.</p>
-                        <p className='text-md py-2 leading-8 text-gray-800 dark:text-white'>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Molestiae, delectus iure <span className='text-teal-500'>quibusdam</span> quas quaerat itaque, est minima ducimus recusandae illo ipsam numquam nam earum libero <span className='text-teal-500'>deleniti</span> voluptatem! Autem, veniam ut.</p>
-                    </div>
-
-
-                    <div className="flex flex-col gap-10 py-10 lg:flex-row lg:flex-wrap">
-                        <div className="basis-1/3 flex-1 ">
-                            <img
-                                className="rounded-lg object-cover"
-                                src={logoWeb1}
-                            />
-                        </div>
-                        <div className="basis-1/3 flex-1">
-                            <img
-                                className="rounded-lg object-cover"
-                                src={logoWeb2}
-                            />
-                        </div>
-                        <div className="basis-1/3 flex-1">
-                            <img
-                                className="rounded-lg object-fill"
-                                src={logoWeb4}
-                            />
-                        </div>
-                        <div className="basis-1/3 flex-1">
-                            <img
-                                className="rounded-lg object-cover"
-                                src={logoWeb6}
-                            />
-                        </div>
-                        <div className="basis-1/3 flex-1">
-                            <img
-                                className="rounded-lg object-cover"
-                                src={logoWeb5}
-                            />
-                        </div>
-                        <div className="basis-1/3 flex-1 lg:bg-orange-100">
-                            <img
-                                className="rounded-lg object-cover "
-                                src={logoWeb3}
-                            />
-                        </div>
-                    </div>
-                </section>
 
             </main>
 
