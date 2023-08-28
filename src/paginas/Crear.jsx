@@ -1,5 +1,7 @@
 import React from 'react'
 import { Formulario } from '../componets/Formulario'
+import Tabla from '../componets/Tabla'
+
 
 const Crear = () => {
     return (
