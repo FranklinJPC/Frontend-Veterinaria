@@ -67,7 +67,7 @@ const Login = () => {
                                     {...field}
                                     type="email"
                                     placeholder="Introduce tu correo electrónico"
-                                    maxLength={120} 
+                                    maxLength={122} 
                                     className={`block w-full rounded-md border ${errors.email ? 'border-red-500' : 'border-gray-300'} focus:border-purple-700 focus:outline-none focus:ring-1 focus:ring-purple-700 py-1 px-2 text-gray-500`}
                                 />
                                 {errors.email && <p className="text-red-500 text-sm">{errors.email.message}</p>}
