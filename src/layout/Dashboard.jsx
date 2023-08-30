@@ -55,7 +55,7 @@ const Dashboard = () => {
                     {autenticado ? <Outlet /> : <Navigate to="/login" />}
                 </div>
                 <div className='bg-gray-800 h-12'>
-                    <p className='text-center  text-slate-100 leading-[2.9rem] underline'>Todos los derechos reservados</p>
+                    <p className='text-center  text-slate-100 leading-[2.9rem] underline'>Todos los derechos reservados | Este sitio fue creado por SOFTWARO</p>
                 </div>
 
             </div>
