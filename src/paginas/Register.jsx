@@ -58,7 +58,6 @@ export const Register = () => {
                                 defaultValue=""
                                 rules={{
                                     required: 'Este campo es obligatorio',
-                                    maxLength: { value: 30, message: 'El nombre debe tener un máximo de 30 caracteres' },
                                     pattern: {
                                         value: /^[A-Za-z\s]+$/,
                                         message: 'Ingresa solo letras en este campo',
@@ -70,6 +69,7 @@ export const Register = () => {
                                             {...field}
                                             type="text"
                                             placeholder="Ingresa tu nombre"
+                                            maxLength={40}
                                             className={`block w-full rounded-md border ${errors.nombre ? 'border-red-500' : 'border-gray-300'
                                                 } focus:border-gray-700 focus:outline-none focus:ring-1 focus:ring-gray-700 py-1 px-1.5 text-gray-500`}
                                             required
@@ -93,7 +93,6 @@ export const Register = () => {
                                 defaultValue=""
                                 rules={{
                                     required: "Este campo es obligatorio",
-                                    maxLength: { value: 30, message: 'El apellido debe tener un máximo de 30 caracteres' },
                                     pattern: {
                                         value: /^[A-Za-z\s]+$/,
                                         message: 'Ingresa solo letras en este campo',
@@ -105,6 +104,7 @@ export const Register = () => {
                                             {...field}
                                             type="text"
                                             placeholder="Ingresa tu apellido"
+                                            maxLength={40}
                                             className={`block w-full rounded-md border ${errors.apellido ? "border-red-500" : "border-gray-300"
                                                 } focus:border-gray-700 focus:outline-none focus:ring-1 focus:ring-gray-700 py-1 px-1.5 text-gray-500`}
                                             required
@@ -129,8 +129,7 @@ export const Register = () => {
                                 control={control}
                                 defaultValue=""
                                 rules={{
-                                    required: "Este campo es obligatorio",
-                                    maxLength: { value: 80, message: 'La dirección debe tener un máximo de 80 caracteres' },
+                                    required: "Este campo es obligatorio"
                                 }}
                                 render={({ field }) => (
                                     <div className="mb-3">
@@ -138,6 +137,7 @@ export const Register = () => {
                                             {...field}
                                             type="text"
                                             placeholder="Ingresa tu dirección"
+                                            maxLength={120}
                                             className={`block w-full rounded-md border ${errors.direccion ? "border-red-500" : "border-gray-300"
                                                 } focus:border-gray-700 focus:outline-none focus:ring-1 focus:ring-gray-700 py-1 px-1.5 text-gray-500`}
                                             required
@@ -172,7 +172,7 @@ export const Register = () => {
                                     <div className="mb-3">
                                         <input
                                             {...field}
-                                            type="text"
+                                            type="number"
                                             placeholder="Ingresa tu teléfono"
                                             className={`block w-full rounded-md border ${errors.telefono ? "border-red-500" : "border-gray-300"
                                                 } focus:border-gray-700 focus:outline-none focus:ring-1 focus:ring-gray-700 py-1 px-1.5 text-gray-500`}
@@ -214,6 +214,7 @@ export const Register = () => {
                                             {...field}
                                             type="email"
                                             placeholder="Introduce tu correo electrónico"
+                                            maxLength={60} 
                                             className={`block w-full rounded-md border ${errors.email ? "border-red-500" : "border-gray-300"
                                                 } focus:border-purple-700 focus:outline-none focus:ring-1 focus:ring-purple-700 py-1 px-1.5 text-gray-500`}
                                         />
