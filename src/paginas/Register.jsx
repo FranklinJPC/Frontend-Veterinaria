@@ -13,9 +13,13 @@ export const Register = () => {
     const [mensaje, setMensaje] = useState({});
 
     const onSubmit = async (data) => {
+        const trimmedData = Object.keys(data).reduce((acc, key) => {
+            acc[key] = typeof data[key] === 'string' ? data[key].trim() : data[key];
+            return acc;
+        }, {});
         try {
             const url = `${import.meta.env.VITE_BACKEND_URL}/registro`;
-            const respuesta = await axios.post(url, data);
+            const respuesta = await axios.post(url, trimmedData);
             setMensaje({ respuesta: respuesta.data.msg, tipo: true });
             setTimeout(() => {
                 setMensaje({});
