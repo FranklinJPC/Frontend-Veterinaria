@@ -9,9 +9,9 @@ import {
   useGlobalFilter,
   usePagination,
   canPreviousPage,
-  canNextPage
+  canNextPage,
 } from "react-table";
-import { MdDeleteForever, MdNoteAdd, MdInfo } from "react-icons/md"; // Importa react-icons/md
+import { MdDeleteForever, MdNoteAdd, MdInfo } from "react-icons/md";
 
 const Tabla = () => {
   const navigate = useNavigate();
@@ -135,6 +135,9 @@ const Tabla = () => {
     setGlobalFilter,
     state: { globalFilter, pageIndex, pageSize },
     page,
+    gotoPage,
+    setPageSize,
+    previousPage,
   } = useTable(
     {
       columns,
@@ -147,17 +150,39 @@ const Tabla = () => {
   );
 
   return (
-    <div>
+    <div className="mt-4">
       {pacientes.length === 0 ? (
         <Mensaje tipo={"active"}>{"No existen registros"}</Mensaje>
       ) : (
         <>
-          <input
-            type="text"
-            value={globalFilter || ""}
-            onChange={(e) => setGlobalFilter(e.target.value)}
-            placeholder="Buscar..."
-          />
+          <div className="flex justify-between items-center mb-4">
+            <div className="relative flex-1">
+              <input
+                type="text"
+                value={globalFilter || ""}
+                onChange={(e) => setGlobalFilter(e.target.value)}
+                placeholder="Busca por el nombre del propietario..."
+                className="w-full px-4 py-2 border rounded-md pr-10"
+              />
+              <span className="absolute inset-y-0 right-0 pr-3 flex items-center">
+                <svg
+                  className="w-4 h-4 text-gray-500"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M21 21l-5.2-5.2"
+                  />
+                  <circle cx="10" cy="10" r="7" />
+                </svg>
+              </span>
+            </div>
+          </div>
           <table {...getTableProps()} className="w-full mt-5 table-auto shadow-lg bg-white">
             <thead className="bg-gray-800 text-slate-400">
               {headerGroups.map((headerGroup) => (
@@ -183,26 +208,28 @@ const Tabla = () => {
               })}
             </tbody>
           </table>
-          <div className="pagination">
-            <button onClick={() => gotoPage(0)} disabled={!canPreviousPage}>
+          <div className="pagination flex items-center justify-center mt-4">
+            <button
+              className="px-3 py-1 border rounded-md mr-2 hover:bg-gray-400 hover:text-white bg-gray-800 text-slate-400"
+              onClick={() => gotoPage(0)}
+              disabled={!canPreviousPage}
+            >
               {"<<"}
             </button>{" "}
-            <button onClick={() => previousPage()} disabled={!canPreviousPage}>
+            <button
+              className="px-3 py-1 border rounded-md mr-2 hover:bg-gray-400 hover:text-white bg-gray-800 text-slate-400"
+              onClick={() => previousPage()}
+              disabled={!canPreviousPage}
+            >
               {"<"}
             </button>{" "}
-            <button onClick={() => nextPage()} disabled={!canNextPage}>
-              {">"}
-            </button>{" "}
-            <button onClick={() => gotoPage(pageCount - 1)} disabled={!canNextPage}>
-              {">>"}
-            </button>{" "}
-            <span>
+            <span className="mr-2">
               Página{" "}
               <strong>
                 {pageIndex + 1} de {page.length}
               </strong>
             </span>
-            <span>
+            <span className="mr-2">
               | Ir a la página:{" "}
               <input
                 type="number"
@@ -211,21 +238,36 @@ const Tabla = () => {
                   const page = e.target.value ? Number(e.target.value) - 1 : 0;
                   gotoPage(page);
                 }}
-                style={{ width: "50px" }}
+                className="w-16 px-2 py-1 border rounded-md text-center"
               />
             </span>{" "}
             <select
+              className="px-2 py-1 border rounded-md mr-2"
               value={pageSize}
               onChange={(e) => {
                 setPageSize(Number(e.target.value));
               }}
             >
-              {[10, 20, 30, 40, 50].map((pageSize) => (
+              {[5, 10, 15, 20, 25, 30].map((pageSize) => (
                 <option key={pageSize} value={pageSize}>
                   Mostrar {pageSize}
                 </option>
               ))}
             </select>
+            <button
+              className="px-3 py-1 border rounded-md mr-2 hover:bg-gray-400 hover:text-white bg-gray-800 text-slate-400"
+              onClick={() => nextPage()}
+              disabled={!canNextPage}
+            >
+              {">"}
+            </button>{" "}
+            <button
+              className="px-3 py-1 border rounded-md hover:bg-gray-400 hover:text-white bg-gray-800 text-slate-400"
+              onClick={() => gotoPage(pageCount - 1)}
+              disabled={!canNextPage}
+            >
+              {">>"}
+            </button>{" "}
           </div>
         </>
       )}
