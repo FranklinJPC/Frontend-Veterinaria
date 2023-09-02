@@ -1,4 +1,4 @@
-import { useContext, useState, useEffect} from "react"
+import { useContext, useState, useEffect } from "react"
 import { useNavigate } from 'react-router-dom'
 import { useForm, Controller } from 'react-hook-form';
 import AuthContext from "../context/AuthProvider"
@@ -22,11 +22,40 @@ export const Formulario = ({ paciente }) => {
 
     const onSubmit = async (data) => {
         try {
+            // Elimina espacios al inicio y al final para registrar en el json
             const trimmedData = Object.keys(data).reduce((acc, key) => {
                 acc[key] = typeof data[key] === 'string' ? data[key].trim() : data[key];
                 return acc;
             }, {});
 
+            // Obtener la lista actual de pacientes
+            const token = localStorage.getItem("token");
+            const url = `${import.meta.env.VITE_BACKEND_URL}/pacientes`;
+            const options = {
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${token}`,
+                },
+            };
+            const response = await axios.get(url, options);
+            const pacientesExistente = response.data;
+
+            // validar paciente duplicado
+            const duplicado = pacientesExistente.some(
+                (pacienteExistente) =>
+                    pacienteExistente.nombre.toLowerCase() === data.nombre.toLowerCase() &&
+                    pacienteExistente.propietario.toLowerCase() === data.propietario.toLowerCase()
+            );
+
+            if (duplicado) {
+                setMensaje({
+                    respuesta: "Ya existe un paciente con el mismo nombre y dueño.",
+                    tipo: false,
+                });
+                return;
+            }
+
+            // Solicitud al endpoint
             if (paciente?._id) {
                 const token = localStorage.getItem("token");
                 const url = `${import.meta.env.VITE_BACKEND_URL}/paciente/actualizar/${paciente._id}`;
