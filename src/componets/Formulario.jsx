@@ -313,6 +313,22 @@ export const Formulario = ({ paciente }) => {
                     )}
                 />
             </div>
+            <div>
+                <label htmlFor="image" className="text-gray-700 uppercase font-bold text-sm">
+                    Foto del paciente:
+                </label>
+                <div className="mb-5 form-floating">
+                    <input
+                        className="form-control"
+                        id="image"
+                        type="file"
+                        placeholder="Selecciona una imagen..."
+                        required
+                        name="image"
+                    />
+                    <label htmlFor="image">Imagen</label>
+                </div>
+            </div>
 
             <input
                 type="submit"
