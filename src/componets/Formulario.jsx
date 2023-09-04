@@ -262,7 +262,7 @@ export const Formulario = ({ paciente }) => {
             <div>
                 <label
                     htmlFor='Salida:'
-                    className='text-gray-700 uppercase font-bold text-sm'>Fecha de salida: </label>
+                    className='text-gray-700 uppercase font-bold text-sm'>Fecha de ingreso: </label>
                 <Controller
                     name='salida'
                     control={control}
