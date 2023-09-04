@@ -16,6 +16,7 @@ import { MdDeleteForever, MdNoteAdd, MdInfo } from "react-icons/md";
 const Tabla = () => {
   const navigate = useNavigate();
   const [pacientes, setPacientes] = useState([]);
+  const [pageCount, setPageCount] = useState(0);
 
   const listarPacientes = async () => {
     try {
@@ -29,6 +30,7 @@ const Tabla = () => {
       };
       const respuesta = await axios.get(url, options);
       setPacientes(respuesta.data);
+      setPageCount(Math.ceil(respuesta.data.length / pageSize));
     } catch (error) {
       console.log(error);
     }
@@ -138,11 +140,14 @@ const Tabla = () => {
     gotoPage,
     setPageSize,
     previousPage,
+    nextPage,
+    canPreviousPage,
+    canNextPage,
   } = useTable(
     {
       columns,
       data,
-      initialState: { pageSize: 10 },
+      initialState: { pageSize: 5 },
     },
     useFilters,
     useGlobalFilter,
@@ -196,7 +201,7 @@ const Tabla = () => {
               ))}
             </thead>
             <tbody {...getTableBodyProps()}>
-              {rows.map((row) => {
+              {page.map((row) => { // Cambia rows a page
                 prepareRow(row);
                 return (
                   <tr {...row.getRowProps()} className="border-b hover:bg-gray-300 text-center">
@@ -241,19 +246,6 @@ const Tabla = () => {
                 className="w-16 px-2 py-1 border rounded-md text-center"
               />
             </span>{" "}
-            <select
-              className="px-2 py-1 border rounded-md mr-2"
-              value={pageSize}
-              onChange={(e) => {
-                setPageSize(Number(e.target.value));
-              }}
-            >
-              {[5, 10, 15, 20, 25, 30].map((pageSize) => (
-                <option key={pageSize} value={pageSize}>
-                  Mostrar {pageSize}
-                </option>
-              ))}
-            </select>
             <button
               className="px-3 py-1 border rounded-md mr-2 hover:bg-gray-400 hover:text-white bg-gray-800 text-slate-400"
               onClick={() => nextPage()}
