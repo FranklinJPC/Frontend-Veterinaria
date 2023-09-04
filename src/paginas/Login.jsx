@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useForm, Controller } from 'react-hook-form';
 import AuthContext from '../context/AuthProvider'
 import axios from 'axios';
+import Mensaje from '../componets/Alertas/Mensaje';
 
 
 const Login = () => {
@@ -33,7 +34,7 @@ const Login = () => {
         }
     };
 
-    
+
     return (
         <>
             <div className="w-1/2 h-screen bg-[url('/public/images/doglogin.jpg')] 
@@ -42,9 +43,9 @@ const Login = () => {
             </div>
 
             <div className="w-1/2 h-screen bg-white flex justify-center items-center">
-                
+
                 <div className="md:w-4/5 sm:w-full">
-                    {Object.keys(mensaje).length>0 && <Mensaje tipo={mensaje.tipo}>{mensaje.respuesta}</Mensaje>}
+                    {Object.keys(mensaje).length > 0 && <Mensaje tipo={mensaje.tipo}>{mensaje.respuesta}</Mensaje>}
                     <h1 className="text-3xl font-semibold mb-2 text-center uppercase  text-gray-500">¡Bienvenido de nuevo!</h1>
                     <small className="text-gray-400 block my-4 text-sm">Por favor ingresa tus datos</small>
 
@@ -56,21 +57,21 @@ const Login = () => {
                             rules={{
                                 required: 'Este campo es obligatorio',
                                 pattern: {
-                                value: /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/,
-                                message: 'Formato de correo electrónico inválido'
+                                    value: /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/,
+                                    message: 'Formato de correo electrónico inválido'
                                 }
                             }}
                             render={({ field }) => (
                                 <div className="mb-3">
-                                <label className="mb-2 block text-sm font-semibold">Correo electrónico</label>
-                                <input
-                                    {...field}
-                                    type="email"
-                                    placeholder="Introduce tu correo electrónico"
-                                    maxLength={122} 
-                                    className={`block w-full rounded-md border ${errors.email ? 'border-red-500' : 'border-gray-300'} focus:border-purple-700 focus:outline-none focus:ring-1 focus:ring-purple-700 py-1 px-2 text-gray-500`}
-                                />
-                                {errors.email && <p className="text-red-500 text-sm">{errors.email.message}</p>}
+                                    <label className="mb-2 block text-sm font-semibold">Correo electrónico</label>
+                                    <input
+                                        {...field}
+                                        type="email"
+                                        placeholder="Introduce tu correo electrónico"
+                                        maxLength={122}
+                                        className={`block w-full rounded-md border ${errors.email ? 'border-red-500' : 'border-gray-300'} focus:border-purple-700 focus:outline-none focus:ring-1 focus:ring-purple-700 py-1 px-2 text-gray-500`}
+                                    />
+                                    {errors.email && <p className="text-red-500 text-sm">{errors.email.message}</p>}
                                 </div>
                             )}
                         />
