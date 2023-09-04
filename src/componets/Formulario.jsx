@@ -22,72 +22,74 @@ export const Formulario = ({ paciente }) => {
 
     const onSubmit = async (data) => {
         try {
-            // Elimina espacios al inicio y al final para registrar en el json
-            const trimmedData = Object.keys(data).reduce((acc, key) => {
-                acc[key] = typeof data[key] === 'string' ? data[key].trim() : data[key];
-                return acc;
-            }, {});
-
-            // Obtener la lista actual de pacientes
-            const token = localStorage.getItem("token");
-            const url = `${import.meta.env.VITE_BACKEND_URL}/pacientes`;
-            const options = {
-                headers: {
-                    "Content-Type": "application/json",
-                    Authorization: `Bearer ${token}`,
-                },
-            };
-            const response = await axios.get(url, options);
-            const pacientesExistente = response.data;
-
-            // validar paciente duplicado
+          // Elimina espacios al inicio y al final para registrar en el json
+          const trimmedData = Object.keys(data).reduce((acc, key) => {
+            acc[key] = typeof data[key] === 'string' ? data[key].trim() : data[key];
+            return acc;
+          }, {});
+      
+          // Obtener la lista actual de pacientes
+          const token = localStorage.getItem("token");
+          const url = `${import.meta.env.VITE_BACKEND_URL}/pacientes`;
+          const options = {
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${token}`,
+            },
+          };
+          const response = await axios.get(url, options);
+          const pacientesExistente = response.data;
+      
+          // Validar paciente duplicado solo al crear uno nuevo
+          if (!paciente?._id) {
             const duplicado = pacientesExistente.some(
-                (pacienteExistente) =>
-                    pacienteExistente.nombre.toLowerCase() === data.nombre.toLowerCase() &&
-                    pacienteExistente.propietario.toLowerCase() === data.propietario.toLowerCase()
+              (pacienteExistente) =>
+                pacienteExistente.nombre.toLowerCase() === data.nombre.toLowerCase() &&
+                pacienteExistente.propietario.toLowerCase() === data.propietario.toLowerCase()
             );
-
+      
             if (duplicado) {
-                setMensaje({
-                    respuesta: "Ya existe un paciente con el mismo nombre y dueño.",
-                    tipo: false,
-                });
-                return;
+              setMensaje({
+                respuesta: "Ya existe un paciente con el mismo nombre y dueño.",
+                tipo: false,
+              });
+              return;
             }
-
-            // Solicitud al endpoint
-            if (paciente?._id) {
-                const token = localStorage.getItem("token");
-                const url = `${import.meta.env.VITE_BACKEND_URL}/paciente/actualizar/${paciente._id}`;
-                const options = {
-                    headers: {
-                        method: "PUT",
-                        "Content-Type": "application/json",
-                        Authorization: `Bearer ${token}`,
-                    },
-                };
-                await axios.put(url, trimmedData, options);
-                navigate("/dashboard/listar");
-            } else {
-                const token = localStorage.getItem("token");
-                trimmedData.id = auth._id;
-                const url = `${import.meta.env.VITE_BACKEND_URL}/paciente/registro`;
-                const options = {
-                    headers: {
-                        "Content-Type": "application/json",
-                        Authorization: `Bearer ${token}`,
-                    },
-                };
-                await axios.post(url, trimmedData, options);
-                navigate("/dashboard/listar");
-            }
+          }
+      
+          // Solicitud al endpoint
+          if (paciente?._id) {
+            const token = localStorage.getItem("token");
+            const url = `${import.meta.env.VITE_BACKEND_URL}/paciente/actualizar/${paciente._id}`;
+            const options = {
+              headers: {
+                method: "PUT",
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${token}`,
+              },
+            };
+            await axios.put(url, trimmedData, options);
+            navigate("/dashboard/listar");
+          } else {
+            const token = localStorage.getItem("token");
+            trimmedData.id = auth._id;
+            const url = `${import.meta.env.VITE_BACKEND_URL}/paciente/registro`;
+            const options = {
+              headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${token}`,
+              },
+            };
+            await axios.post(url, trimmedData, options);
+            navigate("/dashboard/listar");
+          }
         } catch (error) {
-            setMensaje({ respuesta: error.response.data.msg, tipo: false });
-            setTimeout(() => {
-                setMensaje({});
-            }, 3000);
+          setMensaje({ respuesta: error.response.data.msg, tipo: false });
+          setTimeout(() => {
+            setMensaje({});
+          }, 3000);
         }
-    };
+      };
 
     return (
         <form onSubmit={handleSubmit(onSubmit)}>
